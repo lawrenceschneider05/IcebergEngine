@@ -2,10 +2,30 @@
 //
 
 #include "IcebergEngine.h"
+#include <iostream>
 
-namespace IcebergEngine
+using std::cout;
+
+namespace Engine
 {
-    void PrintEngineVersion() {
-        std::cout << "IcebergEngine Static Library Loaded!\n";
-    }
+	IcebergEngine::IcebergEngine()
+	{
+		cout << "Constructor\n";
+	}
+
+	IcebergEngine::~IcebergEngine()
+	{
+		cout << "Destructor\n";
+	}
+
+	bool IcebergEngine::init() 
+	{
+		cout << "Init\n";
+		return 1;
+	}
+
+	void IcebergEngine::start() 
+	{
+		cout << "Start\n";
+	}
 }

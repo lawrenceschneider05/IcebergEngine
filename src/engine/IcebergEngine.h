@@ -6,7 +6,19 @@
 #include <iostream>
 
 // TODO: Reference additional headers your program requires here.
-namespace IcebergEngine
+namespace Engine
 {
 	void PrintEngineVersion();
+
+	class IcebergEngine
+	{
+	public:
+		IcebergEngine();
+		~IcebergEngine();
+
+		bool init();
+		
+		void start();
+	private:
+	};
 }
