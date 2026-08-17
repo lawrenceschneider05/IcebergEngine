@@ -2,30 +2,28 @@
 //
 
 #include "IcebergEngine.h"
-#include <iostream>
-
-using std::cout;
+#include "utils/log.h"
 
 namespace Engine
 {
 	IcebergEngine::IcebergEngine()
 	{
-		cout << "Constructor\n";
+		log(LOG_DEBUG, "Constructor");
 	}
 
 	IcebergEngine::~IcebergEngine()
 	{
-		cout << "Destructor\n";
+		log(LOG_DEBUG, "Destructor");
 	}
 
 	bool IcebergEngine::init() 
 	{
-		cout << "Init\n";
+		log(LOG_SUCCESS, "Init");
 		return 1;
 	}
 
 	void IcebergEngine::start() 
 	{
-		cout << "Start\n";
+		log(LOG_DEBUG, "Start");
 	}
 }

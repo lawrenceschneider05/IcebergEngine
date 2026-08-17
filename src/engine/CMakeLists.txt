@@ -18,6 +18,7 @@ target_include_directories(Engine PUBLIC
 )
 
 target_include_directories(Engine PRIVATE 
+    "${CMAKE_SOURCE_DIR}/src/engine"
     "${CMAKE_SOURCE_DIR}/vendor/include"
 )
 
