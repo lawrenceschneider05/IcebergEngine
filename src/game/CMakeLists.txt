@@ -12,6 +12,7 @@ endif()
 
 target_include_directories(Game PRIVATE 
     "${CMAKE_SOURCE_DIR}/vendor/include"
+    "${CMAKE_SOURCE_DIR}/src/engine"
 )
 target_link_directories(Game PRIVATE 
     "${CMAKE_SOURCE_DIR}/vendor/lib"

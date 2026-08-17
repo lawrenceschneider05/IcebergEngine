@@ -6,3 +6,7 @@
 #include <iostream>
 
 // TODO: Reference additional headers your program requires here.
+namespace IcebergEngine
+{
+	void PrintEngineVersion();
+}

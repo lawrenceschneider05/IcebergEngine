@@ -3,10 +3,9 @@
 
 #include "IcebergEngine.h"
 
-using namespace std;
-
-int main()
+namespace IcebergEngine
 {
-	cout << "Hello CMake." << endl;
-	return 0;
+    void PrintEngineVersion() {
+        std::cout << "IcebergEngine Static Library Loaded!\n";
+    }
 }
