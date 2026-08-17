@@ -12,4 +12,5 @@ endif()
 project ("IcebergEngine")
 
 # Include sub-projects.
-add_subdirectory ("IcebergEngine")
+add_subdirectory ("src/engine")
+add_subdirectory ("src/game")
