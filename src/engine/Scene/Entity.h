@@ -1,5 +1,8 @@
 #pragma once
 
+
+#include <Renderer/Mesh.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -27,14 +30,14 @@ namespace Engine {
 			model = glm::scale(model, _transform.scale);
 			return model;
 		}
-
+		const Mesh& getMesh() const { return *_mesh; }
 		const Transform& getTransform() const { return _transform; }
 
 	private:
 		void cleanup();
 
 		Transform _transform;
-		// Connect to mesh and texture
+		std::unique_ptr<Mesh> _mesh;
 
 	};
 
