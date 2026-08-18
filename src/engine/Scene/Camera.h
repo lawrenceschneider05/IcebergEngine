@@ -18,7 +18,7 @@ namespace Engine {
 		
 		Camera(const CameraProperties& properties, const Transform& transform) :
 			Entity(transform), _properties(properties){}
-
+			
 		glm::mat4 getViewMatrix() const {
 			const Transform& t = getTransform();
 			glm::mat4 view = glm::lookAt(t.position, t.position + getForwardVector(), getUpVector());
