@@ -15,7 +15,7 @@ namespace Engine {
 
 	class Entity {
 	public:
-		Entity(Transform& transform)
+		Entity(const Transform& transform)
 			: _transform{ transform } {
 		}
 
