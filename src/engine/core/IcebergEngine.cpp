@@ -3,27 +3,39 @@
 
 #include "IcebergEngine.h"
 #include "utils/log.h"
+#include "platform/platform_factory.h"
 
 namespace Engine
 {
 	IcebergEngine::IcebergEngine()
 	{
-		log(LOG_DEBUG, "Constructor");
+		WindowConfig config;
+		config.title = "Iceberg";
+		config.dimension = { 10,10 };
+		config.maximized = true;
+		window = create_window(PlatformBackend::GLFW, config);
+		platform = create_platform(PlatformBackend::GLFW);
 	}
 
 	IcebergEngine::~IcebergEngine()
 	{
-		log(LOG_DEBUG, "Destructor");
+		delete window;
+		delete platform;
 	}
 
 	bool IcebergEngine::init() 
 	{
-		log(LOG_SUCCESS, "Init");
+		platform->init();
+		window->init();
 		return 1;
 	}
 
 	void IcebergEngine::start() 
 	{
-		log(LOG_DEBUG, "Start");
+		while (!window->should_close())
+		{
+			window->poll_events();
+			window->swap_buffers();
+		}
 	}
 }

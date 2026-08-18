@@ -1,11 +1,9 @@
-﻿// IcebergEngine.h : Include file for standard system include files,
-// or project specific include files.
-
-#pragma once
+﻿#pragma once
 
 #include <iostream>
+#include "window/iwindow.h"
+#include "platform/iplatform.h"
 
-// TODO: Reference additional headers your program requires here.
 namespace Engine
 {
 	void PrintEngineVersion();
@@ -20,5 +18,7 @@ namespace Engine
 		
 		void start();
 	private:
+		IWindow* window;
+		IPlatform* platform;
 	};
 }

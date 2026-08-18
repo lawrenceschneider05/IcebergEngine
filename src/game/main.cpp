@@ -13,11 +13,5 @@ int main()
 	{
 		engine.start();
 	}
-
-	log(LOG_DEBUG, "test ", 123);
-	log(LOG_INFO, "test", 123);
-	log(LOG_WARN, "test", 123);
-	log(LOG_SUCCESS, "test", 123);
-	log(LOG_ERROR, "test", 123);
 	return 0;
 }
