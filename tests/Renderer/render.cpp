@@ -111,7 +111,7 @@ int main()
     };
     unsigned int indices[] = { 0, 1, 2 };
 
-    auto vb = std::make_shared<VertexBuffer>(vertices, sizeof(vertices));
+    auto vb = std::make_shared<OpenGLVertexBuffer>(vertices, sizeof(vertices));
     checkGLError("VertexBuffer ctor");
 
     vb->SetLayout({
@@ -119,11 +119,11 @@ int main()
         { ShaderDataType::Float3, "aColor" },
         });
 
-    auto ib = std::make_shared<IndexBuffer>(indices, 3);
+    auto ib = std::make_shared<glIndexBuffer>(indices, 3);
     checkGLError("IndexBuffer ctor");
     assert(ib->getCount() == 3);
 
-    VertexArray va;
+    glVertexArray va;
     va.SetVertexBuffer(vb);
     checkGLError("SetVertexBuffer");
     va.SetIndexBuffer(ib);
@@ -145,8 +145,8 @@ int main()
     // Moves a VertexBuffer and makes sure the old one's destructor doesn't
     // double-free the GL buffer out from under the new one.
     {
-        VertexBuffer temp(vertices, sizeof(vertices));
-        VertexBuffer moved(std::move(temp));
+        OpenGLVertexBuffer temp(vertices, sizeof(vertices));
+        OpenGLVertexBuffer moved(std::move(temp));
         moved.Bind();
         checkGLError("moved VertexBuffer bind");
     } // both destructors run here

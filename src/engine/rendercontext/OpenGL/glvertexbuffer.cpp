@@ -1,27 +1,27 @@
-#include "VertexBuffer.h"
+#include "glvertexbuffer.h"
 #include <glad/glad.h>
 
 namespace Engine {
 
-    VertexBuffer::VertexBuffer(const void* data, size_t size)
+    glVertexBuffer::glVertexBuffer(const void* data, size_t size)
     {
         glGenBuffers(1, &RendererID);
         glBindBuffer(GL_ARRAY_BUFFER, RendererID);
         glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
     }
 
-    VertexBuffer::~VertexBuffer()
+    glVertexBuffer::~glVertexBuffer()
     {
         glDeleteBuffers(1, &RendererID);
     }
 
-    VertexBuffer::VertexBuffer(VertexBuffer&& other) noexcept
+    glVertexBuffer::glVertexBuffer(glVertexBuffer&& other) noexcept
         : RendererID(other.RendererID)
     {
         other.RendererID = 0;
     }
 
-    VertexBuffer& VertexBuffer::operator=(VertexBuffer&& other) noexcept
+    glVertexBuffer& glVertexBuffer::operator=(glVertexBuffer&& other) noexcept
     {
         if (this != &other)
         {
@@ -32,12 +32,12 @@ namespace Engine {
         return *this;
     }
 
-    void VertexBuffer::Bind() const
+    void glVertexBuffer::Bind() const
     {
         glBindBuffer(GL_ARRAY_BUFFER, RendererID);
     }
 
-    void VertexBuffer::Unbind() const
+    void glVertexBuffer::Unbind() const
     {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
