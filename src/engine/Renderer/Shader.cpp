@@ -1,3 +1,8 @@
+#include "Shader.h"
+#include "utils/log.h"
+#include <fstream>
+#include <sstream>
+
 namespace {
 
     void checkCompileErrors(unsigned int shader, std::string type)
@@ -10,7 +15,7 @@ namespace {
             if (!success)
             {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                //FIX THIS
+                Engine::log(Engine::LOG_ERROR, "Shader compile error (", type, "): ", infoLog);
             }
         }
         else
@@ -19,7 +24,7 @@ namespace {
             if (!success)
             {
                 glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                //FIX THIS
+                Engine::log(Engine::LOG_ERROR, "Shader link error: ", infoLog);
             }
         }
     }
@@ -28,49 +33,53 @@ namespace {
 
 namespace Engine {
 
-    shader::shader(string vPath, string fPath) : vertPath(vPath), fragPath(fPath)
+    Shader::Shader(std::string vPath, std::string fPath) : vertPath(vPath), fragPath(fPath)
     {
         compileShaders();
     }
-    void shader::bind()
+
+    void Shader::bind()
     {
         glUseProgram(program);
     }
-    void shader::setMat4(string name, mat4 mat)
+
+    void Shader::setMat4(std::string name, glm::mat4 mat)
     {
         GLint location = glGetUniformLocation(program, name.c_str());
         glUniformMatrix4fv(location, 1, GL_FALSE, &mat[0][0]);
     }
-    string shader::readFile(const string& path)
-    {
-        string code;
-        ifstream file;
 
-        file.exceptions(ifstream::failbit | ifstream::badbit);
+    std::string Shader::readFile(const std::string& path)
+    {
+        std::ifstream file;
+
+        file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         try
         {
             file.open(path);
-            stringstream stream;
+            std::stringstream stream;
             stream << file.rdbuf();
             file.close();
             return stream.str();
         }
-        catch (ifstream::failure& e)
+        catch (std::ifstream::failure& e)
         {
-            stringstream ss{ "Shader file " };
-            ss << path << " failed to open";
-            spdlog::error(ss.str());
+            log(LOG_ERROR, "Failed to open shader file: ", path, " (", e.what(), ")");
         }
 
-        return string();
+        return std::string();
     }
-    void shader::compileShaders() {
-        string vertCode = readFile(vertPath);
-        string fragCode = readFile(fragPath);
+
+    void Shader::compileShaders() {
+        std::string vertCode = readFile(vertPath);
+        std::string fragCode = readFile(fragPath);
+
+        log(LOG_DEBUG, "Vertex source:\n", vertCode);
+        log(LOG_DEBUG, "Fragment source:\n", fragCode);
 
         const char* code = vertCode.c_str();
+        unsigned int v, f;
 
-        u32 v, f;
         v = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(v, 1, &code, NULL);
         glCompileShader(v);

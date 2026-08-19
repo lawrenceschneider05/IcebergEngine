@@ -14,36 +14,36 @@ namespace Engine {
     };
 
     class Camera : public Entity {
-    public:                               
-		
-		Camera(const CameraProperties& properties, const Transform& transform) :
-			Entity(transform), _properties(properties){}
-			
-		glm::mat4 getViewMatrix() const {
-			const Transform& t = getTransform();
-			glm::mat4 view = glm::lookAt(t.position, t.position + getForwardVector(), getUpVector());
-			return view;
-		}
+    public:
+        Camera(const CameraProperties& properties, const Transform& transform) :
+            Entity(transform), _properties(properties) {
+        }
 
-		glm::mat4 getProjectionMatrix() const {
-			return glm::perspective(glm::radians(_properties.fov), _properties.aspectRatio, _properties.nearPlane, _properties.farPlane);
-		}
+        glm::mat4 getViewMatrix() {
+            const Transform& t = getTransform();
+            glm::mat4 view = glm::lookAt(t.position, t.position + getForwardVector(), getUpVector());
+            return view;
+        }
 
-		glm::vec3 getForwardVector() const {
-			const Transform& t = getTransform();
-			glm::vec3 forward;
-			forward.x = cos(glm::radians(t.rotation.y)) * cos(glm::radians(t.rotation.x));
-			forward.y = sin(glm::radians(t.rotation.x));
-			forward.z = sin(glm::radians(t.rotation.y)) * cos(glm::radians(t.rotation.x));
-			return glm::normalize(forward);
-		}
+        glm::mat4 getProjectionMatrix() {
+            return glm::perspective(glm::radians(_properties.fov), _properties.aspectRatio, _properties.nearPlane, _properties.farPlane);
+        }
 
-		glm::vec3 getUpVector() const {
-			return glm::vec3(0.0f, 1.0f, 0.0f);
-		}
+        glm::vec3 getForwardVector() {
+            const Transform& t = getTransform();
+            glm::vec3 forward;
+            forward.x = cos(glm::radians(t.rotation.y)) * cos(glm::radians(t.rotation.x));
+            forward.y = sin(glm::radians(t.rotation.x));
+            forward.z = sin(glm::radians(t.rotation.y)) * cos(glm::radians(t.rotation.x));
+            return glm::normalize(forward);
+        }
+
+        glm::vec3 getUpVector() {
+            return glm::vec3(0.0f, 1.0f, 0.0f);
+        }
 
     private:
         CameraProperties _properties;
     };
 
-} // namespace Engine
+}

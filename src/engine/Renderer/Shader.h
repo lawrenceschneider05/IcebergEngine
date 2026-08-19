@@ -3,27 +3,24 @@
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
-using std::string;
-using namespace glm;
-
 namespace Engine
 {
-    class shader
+    class Shader
     {
     public:
-        shader() = default;
-        ~shader()
+        Shader() = default;
+        ~Shader()
         {
             if (program != 0)
                 glDeleteProgram(program);
         }
-        shader(string vertPath, string fragPath);
+        Shader(std::string vertPath, std::string fragPath);
         void bind();
-        void setMat4(string, mat4);
+        void setMat4(std::string, glm::mat4);
     private:
-        string readFile(const string& path);
+        std::string readFile(const std::string& path);
         void compileShaders();
-        string vertPath, fragPath;
-        u32 program{};
+        std::string vertPath, fragPath;
+        glm::uint32_t program{};
     };
 }

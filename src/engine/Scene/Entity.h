@@ -1,8 +1,5 @@
 #pragma once
 
-
-#include <Renderer/Mesh.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -22,6 +19,8 @@ namespace Engine {
 			: _transform{ transform } {
 		}
 
+		virtual ~Entity() = default;
+
 		const glm::mat4 getModelMatrix() const {
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), _transform.position);
 			model = glm::rotate(model, glm::radians(_transform.rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -30,14 +29,12 @@ namespace Engine {
 			model = glm::scale(model, _transform.scale);
 			return model;
 		}
-		const Mesh& getMesh() const { return *_mesh; }
-		const Transform& getTransform() const { return _transform; }
+		Transform& getTransform() { return _transform; }
 
 	private:
 		void cleanup();
 
 		Transform _transform;
-		std::unique_ptr<Mesh> _mesh;
 
 	};
 
