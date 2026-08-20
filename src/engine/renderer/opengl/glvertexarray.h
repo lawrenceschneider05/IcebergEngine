@@ -1,9 +1,10 @@
 #pragma once
+
 #include <memory>
 #include <vector>
-#include "iVertexArray.h"
-#include "iIndexBuffer.h"
-#include "iVertexBuffer.h"
+#include "renderer/iVertexArray.h"
+#include "renderer/iIndexBuffer.h"
+#include "renderer/iVertexBuffer.h"
 
 namespace Engine {
 

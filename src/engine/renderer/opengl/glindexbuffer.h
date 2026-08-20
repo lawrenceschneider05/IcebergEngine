@@ -1,5 +1,6 @@
 #pragma once
-#include "engine/renderer/iindexbuffer.h"
+
+#include "renderer/iindexbuffer.h"
 
 namespace Engine {
 
@@ -11,7 +12,7 @@ namespace Engine {
         void Bind() const override;
         void Unbind() const override;
 
-        unsigned int getCount() const override { return count; }
+        unsigned int GetCount() const override { return count; }
 
     private:
         unsigned int RendererID = 0;

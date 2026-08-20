@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ishader.h"
+#include "renderer/ishader.h"
 #include <glad/glad.h>
 
 namespace Engine {

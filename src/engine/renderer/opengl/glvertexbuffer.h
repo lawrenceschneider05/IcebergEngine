@@ -1,6 +1,7 @@
 #pragma once
-#include "iVertexBuffer.h"
-#include "BufferLayout.h"
+
+#include "renderer/iVertexBuffer.h"
+#include "renderer/BufferLayout.h"
 
 namespace Engine {
 
