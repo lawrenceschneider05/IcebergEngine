@@ -15,23 +15,6 @@ namespace Engine {
         glDeleteBuffers(1, &RendererID);
     }
 
-    glVertexBuffer::glVertexBuffer(glVertexBuffer&& other) noexcept
-        : RendererID(other.RendererID)
-    {
-        other.RendererID = 0;
-    }
-
-    glVertexBuffer& glVertexBuffer::operator=(glVertexBuffer&& other) noexcept
-    {
-        if (this != &other)
-        {
-            glDeleteBuffers(1, &RendererID);
-            RendererID = other.RendererID;
-            other.RendererID = 0;
-        }
-        return *this;
-    }
-
     void glVertexBuffer::Bind() const
     {
         glBindBuffer(GL_ARRAY_BUFFER, RendererID);

@@ -13,27 +13,6 @@ namespace Engine {
 		glDeleteVertexArrays(1, &rendererID);
 	}
 
-	glVertexArray::glVertexArray(glVertexArray&& other) noexcept
-		: rendererID(other.rendererID),
-		indexBuffer(std::move(other.indexBuffer)),
-		vertexBuffers(std::move(other.vertexBuffers))
-	{
-		other.rendererID = 0;
-	}
-
-	glVertexArray& glVertexArray::operator=(glVertexArray&& other) noexcept
-	{
-		if (this != &other)
-		{
-			glDeleteVertexArrays(1, &rendererID);
-			rendererID = other.rendererID;
-			indexBuffer = std::move(other.indexBuffer);
-			vertexBuffers = std::move(other.vertexBuffers);
-			other.rendererID = 0;
-		}
-		return *this;
-	}
-
 	void glVertexArray::Bind() const
 	{
 		glBindVertexArray(rendererID);
@@ -44,7 +23,7 @@ namespace Engine {
 		glBindVertexArray(0);
 	}
 
-	void glVertexArray::AddVertexBuffer(const std::shared_ptr<OpenGLVertexBuffer>& vb)
+	void glVertexArray::AddVertexBuffer(const std::shared_ptr<iVertexBuffer>& vb)
 	{
 		glBindVertexArray(rendererID);
 		vb->Bind();
@@ -67,7 +46,7 @@ namespace Engine {
 		vertexBuffers.push_back(vb);
 	}
 
-	void glVertexArray::SetIndexBuffer(const std::shared_ptr<glIndexBuffer>& ib)
+	void glVertexArray::SetIndexBuffer(const std::shared_ptr<iIndexBuffer>& ib)
 	{
 		glBindVertexArray(rendererID);
 		ib->Bind();

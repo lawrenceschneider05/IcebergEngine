@@ -16,26 +16,6 @@ namespace Engine {
         glDeleteBuffers(1, &RendererID);
     }
 
-    glIndexBuffer::glIndexBuffer(glIndexBuffer&& other) noexcept
-        : RendererID(other.RendererID), count(other.count)
-    {
-        other.RendererID = 0;
-        other.count = 0;
-    }
-
-    glIndexBuffer& Engine::glIndexBuffer::operator=(glIndexBuffer&& other) noexcept
-    {
-        if (this != &other)
-        {
-            glDeleteBuffers(1, &RendererID);
-            RendererID = other.RendererID;
-            count = other.count;
-            other.RendererID = 0;
-            other.count = 0;
-        }
-        return *this;
-    }
-
     void glIndexBuffer::Bind() const
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, RendererID);

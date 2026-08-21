@@ -18,8 +18,8 @@ namespace Engine {
         virtual void AddVertexBuffer(const std::shared_ptr<iVertexBuffer>& vertexBuffer) = 0;
         virtual void SetIndexBuffer(const std::shared_ptr<iIndexBuffer>& indexBuffer) = 0;
 
-        virtual const std::vector<std::shared_ptr<iVertexBuffer>>& GetVertexBuffers() const = 0;
-        virtual const std::shared_ptr<iIndexBuffer>& GetIndexBuffer() const = 0;
+        virtual const std::vector<std::shared_ptr<iVertexBuffer>>& getVertexBuffers() const = 0;
+        virtual const std::shared_ptr<iIndexBuffer>& getIndexBuffer() const = 0;
 
         static std::shared_ptr<iVertexArray> Create();
     };
